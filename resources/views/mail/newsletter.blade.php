@@ -1,0 +1,1 @@
+<h1>There is 10% discount on every product</h1>
