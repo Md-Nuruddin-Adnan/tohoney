@@ -19,6 +19,9 @@
         <div class="sl-page-title">
             <h5>Dashboard</h5>
             <p>This is a Dynamic Dashboard</p>
+            @if (Auth::user()->role == 1)
+                <h4>You are Admin</h4>
+            @endif
         </div><!-- sl-page-title -->
     <!-- ########## START CODE HERE ########## -->
 

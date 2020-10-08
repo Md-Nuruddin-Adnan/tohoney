@@ -12,6 +12,7 @@ use App\Faq;
 use App\Contact;
 use Carbon\Carbon;
 use Hash;
+use Auth;
 
 class FrontendController extends Controller
 {
@@ -97,7 +98,7 @@ class FrontendController extends Controller
     function customerregisterpost (Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:App\User,email',
             'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'required'
         ]);
@@ -105,7 +106,12 @@ class FrontendController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 2,
             'created_at' => Carbon::now(),
         ]);
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            return redirect('customer/home');
+        }
+        return back();
     }
 }

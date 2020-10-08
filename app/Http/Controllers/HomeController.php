@@ -17,6 +17,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('checkrole');
     }
 
     /**
@@ -27,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'users' => User::latest()->paginate(3),
+            'users' => User::latest()->paginate(10),
             'total_users' => User::count(),
             'total_sum' => User::sum('id'),
             'avg_users' => User::sum('id') / User::count(),

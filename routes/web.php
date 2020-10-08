@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,13 @@ Route::post('cart/store', 'CartController@store')->name('cart.store');
 Route::get('cart.remove/{cart_id}', 'CartController@remove')->name('cart.remove');
 Route::post('cart.update', 'CartController@update')->name('cart.update');
 
+// CheckoutController Route
+Route::get('checkout', 'CheckoutController@index');
+Route::post('checkout/post', 'CheckoutController@checkoutpost')->name('checkout.post');
+Route::post('get/city/list/ajax', 'CheckoutController@getcitylistajax');
+// Test link
+Route::get('test/sms', 'CheckoutController@testsms');
+
 // Coupon Route
 Route::resource('coupon', 'CouponController');
 Route::get('coupon/delete/{coupon_id}', 'CouponController@coupondelete')->name('coupon.delete');
@@ -91,4 +99,18 @@ Route::get('coupon/delete/{coupon_id}', 'CouponController@coupondelete')->name('
 // WishlistController Route
 Route::get('wishlist', 'WishlistController@index')->name('wishlist');
 Route::get('wishlist/store/{product_id}', 'WishlistController@store')->name('wishlist.store');
-Route::get('wishlist.remove/{wishlist_id}', 'WishlistController@remove')->name('wishlist.remove');
+Route::get('wishlist/remove/{wishlist_id}', 'WishlistController@remove')->name('wishlist.remove');
+
+// CustomerController Route
+Route::get('customer/home', 'CustomerController@home')->middleware('verified');
+Route::get('customer/invoice/download/{order_id}', 'CustomerController@customerinvoicedownload')->middleware('verified');
+
+// GithubController Route
+Route::get('login/github', 'GithubController@redirectToProvider');
+Route::get('login/github/callback', 'GithubController@handleProviderCallback');
+
+// StripePaymentController Route
+Route::get('stripe', 'StripePaymentController@stripe');
+Route::get('stripe/let/{order_id}', 'StripePaymentController@stripelet');
+Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
+Route::post('stripe', 'StripePaymentController@stripeLetPost')->name('stripe.let.post');

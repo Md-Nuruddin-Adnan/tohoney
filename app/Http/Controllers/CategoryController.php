@@ -13,6 +13,12 @@ use Image;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checkrole');
+    }
+    
     function addcategory(){
         return view('admin.category.index', [
             'categories' => Category::latest()->get(),

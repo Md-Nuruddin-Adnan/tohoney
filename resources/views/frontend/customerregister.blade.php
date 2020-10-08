@@ -52,7 +52,7 @@
                   @enderror
                   <button type="submit">Register</button>
                   <div class="text-center">
-                      <a href="login.html">Or Login</a>
+                      <a href="{{ route('login') }}">Or Login</a>
                   </div>
               </div>
             </form>

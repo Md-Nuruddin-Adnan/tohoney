@@ -12,6 +12,12 @@ use Image;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checkrole');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +27,8 @@ class ProductController extends Controller
     {
        return view('admin.product.index', [
         'active_categories' => Category::all(),
-        'products' => Product::latest()->get(),
-        'deleted_products' => Product::onlyTrashed()->get(),
+        'products' => Product::with('productonetoonecategory')->latest()->get(),
+        'deleted_products' => Product::with('productonetoonecategory')->onlyTrashed()->get(),
        ]);
     }
 

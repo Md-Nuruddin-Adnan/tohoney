@@ -62,54 +62,63 @@
 
       <label class="sidebar-label">Navigation</label>
       <div class="sl-sideleft-menu">
-        <a href="{{ route('home') }}" class="sl-menu-link @yield('home')">
+        @if (Auth::user()->role == 1)
+          <a href="{{ route('home') }}" class="sl-menu-link @yield('home')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Home</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <a href="{{ route('addcategory') }}" class="sl-menu-link @yield('category')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Category</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <a href="{{ route('product.index') }}" class="sl-menu-link @yield('product')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Product</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <a href="{{ route('contactview') }}" class="sl-menu-link @yield('contactview')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Contact</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <a href="{{ route('testimonial.index') }}" class="sl-menu-link @yield('testimonial')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Testimonial</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <a href="{{ route('banner.index') }}" class="sl-menu-link @yield('banner')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Banner</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <a href="{{ route('faq.index') }}" class="sl-menu-link @yield('faq')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Faq</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <a href="{{ route('coupon.index') }}" class="sl-menu-link @yield('coupon')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Coupon</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+        @else
+        <a href="{{ url('customer/home') }}" class="sl-menu-link @yield('customer_home')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Home</span>
+            <span class="menu-item-label">Customer Home</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="{{ route('addcategory') }}" class="sl-menu-link @yield('category')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Category</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <a href="{{ route('product.index') }}" class="sl-menu-link @yield('product')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Product</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <a href="{{ route('contactview') }}" class="sl-menu-link @yield('contactview')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Contact</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <a href="{{ route('testimonial.index') }}" class="sl-menu-link @yield('testimonial')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Testimonial</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <a href="{{ route('banner.index') }}" class="sl-menu-link @yield('banner')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Banner</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <a href="{{ route('faq.index') }}" class="sl-menu-link @yield('faq')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Faq</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <a href="{{ route('coupon.index') }}" class="sl-menu-link @yield('coupon')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Coupon</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+        @endif
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>

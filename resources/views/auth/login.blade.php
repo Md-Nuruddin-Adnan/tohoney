@@ -38,7 +38,9 @@
             <a class="tx-info tx-12 d-block mb-2" href="{{ route('password.request') }}"> Forgot password? </a>
         @endif
         <button type="submit" class="btn btn-info btn-block">Sign In</button>
-      </form>
+    </form>
+    <a href="{{ url('login/github') }}" class="my-2 btn btn-secondary btn-block text-white"><i class="fab fa-github mr-1"></i> Login with github</a>
+    <a href="" class="mb-2 btn btn-danger btn-block"><i class="fab fa-google mr-1"></i> Login with google</a>
       <div class="mg-t-60 tx-center">Not yet a member? <a href="{{ route('register') }}" class="tx-info">Sign Up</a></div>
     </div><!-- login-wrapper -->
   </div><!-- d-flex -->

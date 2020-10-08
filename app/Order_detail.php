@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Wishlist extends Model
+class Order_detail extends Model
 {
     use SoftDeletes;
-    function product(){
-        return $this->belongsTo('App\Product')->withTrashed();
+    public function product(){
+        return $this->belongsTo('App\Product');
     }
 }

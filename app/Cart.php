@@ -9,6 +9,6 @@ class Cart extends Model
     protected $fillable = ['product_quantity'];
 
     function product(){
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('App\Product')->withTrashed();
     }
 }

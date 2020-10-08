@@ -13,6 +13,11 @@ use App\Mail\ChangePasswordMail;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function profile(){
         return view('admin.profile.index');
     }
