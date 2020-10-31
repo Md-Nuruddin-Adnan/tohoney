@@ -62,7 +62,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Product Long Description</label>
-                    <textarea name="product_long_description" class="form-control" rows="4">{{ $product_info->product_long_description }}</textarea>
+                    <textarea id="product_long_description" name="product_long_description" class="form-control" rows="4">{{ $product_info->product_long_description }}</textarea>
                     @error('product_long_description')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -102,4 +102,19 @@
     </div><!-- sl-pagebody -->
 </div><!-- sl-mainpanel -->
 <!-- ########## END: MAIN PANEL ########## -->
+@endsection
+
+@section('footer_script')
+<script>
+  $(function(){
+    'use strict';
+
+      // Summernote editor
+      $('#product_long_description').summernote({
+          height: 150,
+          tooltip: false
+        })
+
+  });
+</script>
 @endsection

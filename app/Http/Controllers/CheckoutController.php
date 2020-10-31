@@ -100,6 +100,7 @@ class CheckoutController extends Controller
         foreach (cart_items() as $cart_item) {
             Order_detail::insert([
                 'order_id' => $order_id,
+                'user_id' => Auth::id(),
                 'product_id' => $cart_item->product_id,
                 'product_quantity' => $cart_item->product_quantity,
                 'product_price' => $cart_item->product->product_price,
@@ -117,7 +118,9 @@ class CheckoutController extends Controller
         }
         else{
             // Delete from carts table
-            $cart_item->forceDelete();
+            foreach (cart_items() as $cart_item) {
+                $cart_item->forceDelete();
+            }
             session([
                 'cart_sub_total' => '',
                 'coupon_name' => '',

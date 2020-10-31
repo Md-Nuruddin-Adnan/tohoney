@@ -47,9 +47,16 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2 col-12">
                     <div class="search-form">
-                        <form action="#">
-                            <input type="text" placeholder="Search Here...">
-                            <button><i class="fa fa-search"></i></button>
+                        <form action="{{ url('search') }}" method="GET">
+                            <input type="text" placeholder="Search Here..." name="filter[product_name]">
+                            <select name="filter[category_id]" class="form-control">
+                                <option value="">--Select a category--</option>
+                                @foreach (App\Category::all() as $category)
+                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                @endforeach
+                            </select>
+                            <input type="hidden" name="sort" value="-id">
+                            <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                 </div>
@@ -70,17 +77,34 @@
                     </div>
                     <div class="col-md-6 col-12">
                         <ul class="d-flex account_login-area">
-                            <li>
-                                <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown_style">
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">wishlist</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{{ url('customer/register') }}"> Login/Register </a></li>
+                            @auth
+                                <li>
+                                    <a href="javascript:void(0);"><i class="fa fa-user"></i> 
+                                        
+                                            {{ Auth::user()->name }}
+                                        
+                                        <i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown_style">
+                                        <li><a href="{{ url('customer/home') }}">Order</a></li>
+                                        <li><a href="{{ url('cart') }}">Cart</a></li>
+                                        <li><a href="{{ url('wishlist') }}">wishlist</a></li>
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                          document.getElementById('logout-form').submit();">
+                                             <i class="icon ion-power"></i> Logout
+                                            </a>
+                          
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endauth
+                            @guest
+                                <li><a href="{{ url('customer/register') }}"> Login/Register </a></li>
+                            @endguest
                         </ul>
                     </div>
                 </div>
@@ -122,13 +146,7 @@
                                         <li><a href="{{ route('faqpage') }}">FAQ</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown_style">
-                                        <li><a href="blog.html">blog Page</a></li>
-                                        <li><a href="blog-details.html">blog Details</a></li>
-                                    </ul>
-                                </li>
+                                <li class="@yield('blog')"><a href="{{ route('blogpage') }}">Blog</a></li>
                                 <li class="@yield('nav_contact')"><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>
                         </nav>

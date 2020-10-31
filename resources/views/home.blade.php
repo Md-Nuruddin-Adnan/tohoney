@@ -24,6 +24,23 @@
             @endif
         </div><!-- sl-page-title -->
     <!-- ########## START CODE HERE ########## -->
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="dashboard_chart_1"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="dashboard_chart_2"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- send newsletter to all users -->
     <div class="card mb-3">
@@ -39,12 +56,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h4>Total users: {{ $total_users }}</h4>
-                        <h4>Total Sum: {{ $total_sum }}</h4>
-                        <h4>Total Avg: {{ $avg_users }}</h4>
-                    </div>
+                <div class="card-header card-header-default">
+                    Total users: {{ $total_users }}
                 </div>
 
                 <div class="card-body">
@@ -106,4 +119,72 @@
     </div><!-- sl-pagebody -->
 </div><!-- sl-mainpanel -->
 <!-- ########## END: MAIN PANEL ########## -->
+@endsection
+
+@section('footer_script')
+<script>
+    var ctx = document.getElementById('dashboard_chart_1').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Paid', 'Unpaid', 'Refund'],
+            datasets: [{
+                label: '# of Votes',
+                data: [{{ $paid }}, {{ $unpaid }}, {{ $refund }}],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                ],
+                // borderColor: [
+                //     'rgba(255, 99, 132, 1)',
+                //     'rgba(75, 192, 192, 1)',
+                //     'rgba(255, 159, 64, 1)',
+                // ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById('dashboard_chart_2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Stock', 'Sell'],
+            datasets: [{
+                data: [{{ $total_stock_price }}, {{ $total_sell }}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: false
+            },
+        }
+    });
+</script>
 @endsection

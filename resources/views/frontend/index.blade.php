@@ -77,114 +77,44 @@
                 </div>
             </div>
             <ul class="row">
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                @forelse ($best_seller_after_desc as $best_seller)
+                <li class="col-xl-3 col-lg-4 col-sm-6 col-12 moreload">
                     <div class="product-wrap">
                         <div class="product-img">
-                            <img src="{{ asset('frontend_asset') }}/images/product/1.jpg" alt="">
+                            @if (App\Product::findOrFail($best_seller->product_id)->product_quantity < 1)
+                                <span>Out of Stock</span>
+                            @endif
+                            <img src="{{ asset('uploads/product_photos') }}/{{ App\Product::findOrFail($best_seller->product_id)->product_thumbnail_photo }}" alt="">
                             <div class="product-icon flex-style">
                                 <ul>
                                     <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="{{ route('wishlist.store', $best_seller->product_id) }}"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="product-content">
-                            <h3><a href="single-product.html">Nature Honey</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
+                            <h3><a href="{{ url('product/details') }}/{{ App\Product::findOrFail($best_seller->product_id)->slug }}">{{ App\Product::findOrFail($best_seller->product_id)->product_name }}</a></h3>
+                            <p class="pull-left float-left">${{ App\Product::find($best_seller->product_id)->product_price }}</p>
+                            <ul class="pull-right float-right d-flex">
+                                @if (average_star($best_seller->product_id) == 0)
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                @else
+                                    @for ($i = 1; $i <= average_star($best_seller->product_id); $i++)
+                                        <li><i class="fa fa-star"></i></li>
+                                    @endfor
+                                @endif
                             </ul>
                         </div>
                     </div>
                 </li>
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                    <div class="product-wrap">
-                        <div class="product-img">
-                            <img src="{{ asset('frontend_asset') }}/images/product/2.jpg" alt="">
-                            <div class="product-icon flex-style">
-                                <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="single-product.html">Olive Oil</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                    <div class="product-wrap">
-                        <div class="product-img">
-                            <img src="{{ asset('frontend_asset') }}/images/product/3.jpg" alt="">
-                            <div class="product-icon flex-style">
-                                <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="single-product.html">Olive Oil</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                    <div class="product-wrap">
-                        <div class="product-img">
-                            <img src="{{ asset('frontend_asset') }}/images/product/4.jpg" alt="">
-                            <div class="product-icon flex-style">
-                                <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="single-product.html">Coconut Oil</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
+                @empty
+                    <li class="text-center text-danger">No Product Found</li>
+                @endforelse
             </ul>
         </div>
     </div>
@@ -202,10 +132,12 @@
             </div>
             <ul class="row">
                 @forelse ($active_products as $active_product)
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                <li class="col-xl-3 col-lg-4 col-sm-6 col-12 moreload">
                     <div class="product-wrap">
                         <div class="product-img">
-                            <span>Sale</span>
+                            @if ($active_product->product_quantity < 1)
+                                <span>Out of Stock</span>
+                            @endif
                             <img src="{{ asset('uploads/product_photos') }}/{{ $active_product->product_thumbnail_photo }}" alt="">
                             <div class="product-icon flex-style">
                                 <ul>
@@ -217,15 +149,19 @@
                         </div>
                         <div class="product-content">
                             <h3><a href="{{ url('product/details') }}/{{ $active_product->slug }}">{{ $active_product->product_name }}</a></h3>
-                            <p class="pull-left">${{ $active_product->product_price }}
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
+                            <p class="pull-left float-left">${{ $active_product->product_price }}</p>
+                            <ul class="pull-right float-right d-flex">
+                                @if (average_star($active_product->id) == 0)
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                @else
+                                    @for ($i = 1; $i <= average_star($active_product->id); $i++)
+                                        <li><i class="fa fa-star"></i></li>
+                                    @endfor
+                                @endif
                             </ul>
                         </div>
                     </div>

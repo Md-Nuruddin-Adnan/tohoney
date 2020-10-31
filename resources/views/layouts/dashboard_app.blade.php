@@ -79,6 +79,7 @@
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
               <span class="menu-item-label">Product</span>
+              <span class="badge badge-danger">{{ total_alert_product() }}</span>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
           <a href="{{ route('contactview') }}" class="sl-menu-link @yield('contactview')">
@@ -111,6 +112,12 @@
               <span class="menu-item-label">Coupon</span>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
+          <a href="{{ route('order.index') }}" class="sl-menu-link @yield('order')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Order</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
         @else
         <a href="{{ url('customer/home') }}" class="sl-menu-link @yield('customer_home')">
           <div class="sl-menu-item">
@@ -119,6 +126,21 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         @endif
+        <a href="#" class="sl-menu-link @yield('blog')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Blog</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('blog.index') }}" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="{{ route('blog.category') }}" class="nav-link">Category</a></li>
+          <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
+          <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
+          <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
+          <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
+        </ul>
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -248,6 +270,7 @@
     <script src="{{ asset('dashboard_asset') }}/lib/select2/js/select2.min.js"></script>
     <script src="{{ asset('dashboard_asset') }}/lib/Sweetalert2/Sweetalert2.all.min.js"></script>
     <script src="{{ asset('dashboard_asset') }}/lib/summernote/summernote-bs4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
     <script src="{{ asset('dashboard_asset') }}/js/starlight.js"></script>
 

@@ -45,16 +45,16 @@
                       </thead>
                       <tbody>
                         @forelse ($products as $product)
-                        <tr>
-                          <td>{{ $loop->index + 1 }}</td>
+                        <tr class="{{ ($product->product_quantity <= $product->product_alert_quantity) ? 'bg-danger':'' }}">
+                          <td class="{{ ($product->product_quantity <= $product->product_alert_quantity) ? 'text-white':'' }}">{{ $loop->index + 1 }}</td>
                           {{-- <td>{{ App\Category::find($product->category_id)->category_name }}</td> --}}
-                          <td>{{ $product->productonetoonecategory->category_name }}</td>
-                          <td>{{ $product->product_name }}</td>
-                          <td>{{ $product->product_price }}</td>
-                          <td>{{ $product->product_quantity }}</td>
-                          <td>{{ $product->product_alert_quantity }}</td>
+                          <td class="{{ ($product->product_quantity <= $product->product_alert_quantity) ? 'text-white':'' }}">{{ $product->productonetoonecategory->category_name }}</td>
+                          <td class="{{ ($product->product_quantity <= $product->product_alert_quantity) ? 'text-white':'' }}">{{ $product->product_name }}</td>
+                          <td class="{{ ($product->product_quantity <= $product->product_alert_quantity) ? 'text-white':'' }}">{{ $product->product_price }}</td>
+                          <td class="{{ ($product->product_quantity <= $product->product_alert_quantity) ? 'text-white':'' }}">{{ $product->product_quantity }}</td>
+                          <td class="{{ ($product->product_quantity <= $product->product_alert_quantity) ? 'text-white':'' }}">{{ $product->product_alert_quantity }}</td>
                           <td>
-                            <img style="max-width: 150px"  class="img-fluid" src="{{ asset('uploads\product_photos') }}/{{ $product->product_thumbnail_photo }}" alt="No Photo">
+                            <img style="max-width: 100px"  class="img-fluid" src="{{ asset('uploads\product_photos') }}/{{ $product->product_thumbnail_photo }}" alt="No Photo">
                           </td>
                           <td>
                             <div class="btn-group">

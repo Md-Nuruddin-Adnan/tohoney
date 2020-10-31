@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,11 @@ Route::get('shop', 'FrontendController@shop')->name('shop');
 Route::get('page/faq', 'FrontendController@faqpage')->name('faqpage');
 Route::get('customer/register', 'FrontendController@customerregister');
 Route::post('customer/register/post', 'FrontendController@customerregisterpost');
+Route::post('review/post', 'FrontendController@reviewpost')->name('review.post');
+Route::get('search', 'FrontendController@search')->name('search');
+Route::get('blogpage', 'FrontendController@blogpage')->name('blogpage');
+Route::get('blog/details/{slug}', 'FrontendController@blogdetails');
+Route::get('nextpost/{blog_id}', 'FrontendController@nextpost')->name('nextpost');
 
 // ContactController Route (Admin panel)
 Route::get('contact/upload/download/{contact_id}', 'ContactController@contactuploaddownload');
@@ -113,4 +119,38 @@ Route::get('login/github/callback', 'GithubController@handleProviderCallback');
 Route::get('stripe', 'StripePaymentController@stripe');
 Route::get('stripe/let/{order_id}', 'StripePaymentController@stripelet');
 Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
-Route::post('stripe', 'StripePaymentController@stripeLetPost')->name('stripe.let.post');
+Route::post('stripe/let/post', 'StripePaymentController@stripeLetPost')->name('stripe.let.post');
+
+// OrderController Route
+Route::resource('order', 'OrderController');
+Route::get('order/cancel/{order_id}', 'OrderController@cancel')->name('order.cancel');
+
+// SSLCOMMERZ Start
+Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout');
+Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
+
+Route::post('/pay', 'SslCommerzPaymentController@index');
+Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
+
+Route::post('/success', 'SslCommerzPaymentController@success');
+Route::post('/fail', 'SslCommerzPaymentController@fail');
+Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+
+Route::post('/ipn', 'SslCommerzPaymentController@ipn');
+//SSLCOMMERZ END
+
+
+// Blog_categoryController route start
+Route::get('blog/category', 'Blog_categoryController@category')->name('blog.category');
+Route::post('blog/category/store', 'Blog_categoryController@categorystore')->name('blog.category.store');
+Route::get('blog/category/delete/{category_id}', 'Blog_categoryController@categorydelete')->name('blog.category.delete');
+Route::get('blog/category/edit/{category_id}', 'Blog_categoryController@categoryedit')->name('blog.category.edit');
+Route::post('blog/category/edit/post', 'Blog_categoryController@categoryeditpost')->name('blog.category.edit.post');
+// Blog_categoryController route end
+
+// BlogController route start
+Route::resource('blog', 'BlogController');
+Route::get('blog/delete/{blog_id}', 'BlogController@delete')->name('blog.delete');
+Route::post('blog/comment', 'BlogController@comment')->name('blog.comment');
+Route::post('reply/post', 'BlogController@replypost')->name('reply.post');
+// BlogController route end

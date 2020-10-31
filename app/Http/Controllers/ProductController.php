@@ -9,6 +9,7 @@ use App\Product;
 use App\Product_image;
 use Carbon\Carbon;
 use Image;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
